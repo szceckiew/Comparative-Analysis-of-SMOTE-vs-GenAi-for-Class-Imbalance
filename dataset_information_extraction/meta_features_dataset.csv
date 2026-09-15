@@ -1,0 +1,16 @@
+Dataset_Name,n_samples,n_features,Minority_Ratio,Imbalance_Ratio,Categorical_Ratio,Samples_Per_Feature,Missing_Values_Ratio,Avg_Correlation,Linearity_AUC
+Clean_haberman.csv,306,3,0.2647,2.78,0.0,102.0,0.0,0.0522,0.7068
+Clean_ionosphere.csv,351,33,0.359,1.79,0.0,10.64,0.0,0.2306,0.8276
+Clean_Breast_Cancer_Wisconsin.csv,569,30,0.3726,1.68,0.0,18.97,0.0,0.3949,0.992
+Clean_covid.csv,599,25,0.1352,6.4,0.0,23.96,0.0,0.11,0.8678
+Clean_blood.csv,748,4,0.238,3.2,0.0,187.0,0.0,0.4661,0.8218
+Clean_pimadiabetes.csv,768,8,0.349,1.87,0.0,96.0,0.0,0.175,0.8249
+Clean_Titanic-Dataset.csv,891,8,0.3838,1.61,0.0,111.38,0.0,0.1636,0.8457
+Clean_heart.csv,918,15,0.4466,1.24,0.0,61.2,0.0,0.1489,0.9123
+Clean_shuttle_full_dataset.csv,58000,9,0.214,3.67,0.0,6444.44,0.0,0.1886,0.9908
+Clean_weatherAUS.csv,142193,111,0.2242,3.46,0.0,1281.02,0.0,0.0361,0.8494
+Clean_nsl_kdd_full_dataset.csv,148517,119,0.4812,1.08,0.0,1248.04,0.0,0.0333,0.9267
+Clean_Loan_Default.csv,148670,48,0.2464,3.06,0.0,3097.29,0.0,0.0426,0.5829
+Clean_DDos.csv,223112,78,0.4262,1.35,0.0,2860.41,0.0,0.1752,0.9849
+Clean_Infiltration.csv,252972,78,0.0001,7026.0,0.0,3243.23,0.0,0.1519,0.4619
+Clean_creditcard.csv,275663,29,0.0017,581.8,0.0,9505.62,0.0,0.011,0.9693

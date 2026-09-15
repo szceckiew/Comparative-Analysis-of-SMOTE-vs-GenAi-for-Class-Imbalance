@@ -1,0 +1,11 @@
+dataset,balance_method,wasserstein_mean,kl_divergence_mean,pairwise_real_real,pairwise_synth_synth,pairwise_real_synth
+Clean_sonar,smotified_gan,0.12212904536187222,4.286154493488286,,,
+Clean_sonar,smotified_gan,0.22114300856665692,4.7932170341859015,,,
+Clean_sonar,smotified_gan,0.2461964228497739,12.586544091470724,,,
+Clean_sonar,smotified_gan,0.08631102566817532,6.768936247818385,,,
+Clean_sonar,smotified_gan,0.2453859242014172,8.088603339872005,,,
+Clean_sonar,smotified_gan,0.17724183860781162,5.769020711609671,,,
+Clean_sonar,smotified_gan,0.20779311718042767,10.145284515099254,,,
+Clean_sonar,smotified_gan,0.25314958455953523,10.117882785284694,,,
+Clean_sonar,smotified_gan,0.10750420408841445,6.033599799380485,,,
+Clean_sonar,smotified_gan,0.25057687862501116,11.091201284297403,,,

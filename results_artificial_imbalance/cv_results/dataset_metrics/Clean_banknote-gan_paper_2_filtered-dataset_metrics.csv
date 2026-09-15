@@ -1,0 +1,3 @@
+dataset,balance_method,wasserstein_mean,kl_divergence_mean,pairwise_real_real,pairwise_synth_synth,pairwise_real_synth
+Clean_banknote,gan_paper_2_filtered,0.05200268907246433,0.7084570974975472,0.4116570788474981,0.5390055868716539,0.4833231399348195
+Clean_banknote,gan_paper_2_filtered,0.10185245590027242,0.7986959903548042,0.530151057505628,0.5564453250595901,0.5887714781255106

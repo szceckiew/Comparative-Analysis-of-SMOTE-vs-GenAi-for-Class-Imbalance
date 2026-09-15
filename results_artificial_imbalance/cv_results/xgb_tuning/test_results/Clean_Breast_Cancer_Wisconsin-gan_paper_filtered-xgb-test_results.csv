@@ -1,0 +1,18 @@
+Precision (Benign),Precision (Malignant),Recall (Benign),Recall (Malignant),F1-score (Benign),F1-score (Malignant),AUC (Binary),AUC (Probability),MCC,PR_AUC,Balanced_Accuracy,Frobenius_Kendall_Diff,Training_Time,Generation_Time,Model
+0.9907407407407407,0.8333333333333334,0.9907407407407407,0.8333333333333334,0.9907407407407407,0.8333333333333334,0.912037037037037,0.9984567901234568,0.8240740740740741,0.976190476190476,0.912037037037037,0.17346706274132592,0.6892092227935791,1.429438829421997,"Pipeline(steps=[('model',
+                 XGBClassifier(base_score=None, booster=None, callbacks=None,
+                               colsample_bylevel=None, colsample_bynode=None,
+                               colsample_bytree=0.8, device='cpu',
+                               early_stopping_rounds=None,
+                               enable_categorical=False, eval_metric='logloss',
+                               feature_types=None, feature_weights=None,
+                               gamma=None, grow_policy=None,
+                               importance_type=None,
+                               interaction_constraints=None, learning_rate=0.05,
+                               max_bin=None, max_cat_threshold=None,
+                               max_cat_to_onehot=None, max_delta_step=None,
+                               max_depth=5, max_leaves=None,
+                               min_child_weight=None, missing=nan,
+                               monotone_constraints=None, multi_strategy=None,
+                               n_estimators=100, n_jobs=None,
+                               num_parallel_tree=None, ...))])"

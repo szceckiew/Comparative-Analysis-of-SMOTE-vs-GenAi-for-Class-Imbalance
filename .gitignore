@@ -1,0 +1,15 @@
+.idea/
+*.iml
+*.ws[kw]
+
+__pycache__/
+venv/
+env/
+.env/
+.venv/
+
+results
+# results/histograms
+# results/kendall_correlation
+
+data

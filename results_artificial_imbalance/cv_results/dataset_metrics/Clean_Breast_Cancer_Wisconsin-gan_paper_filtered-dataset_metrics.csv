@@ -1,0 +1,2 @@
+dataset,balance_method,wasserstein_mean,kl_divergence_mean,pairwise_real_real,pairwise_synth_synth,pairwise_real_synth
+Clean_Breast_Cancer_Wisconsin,gan_paper_filtered,0.0749581293202242,1.155714338593006,1.4488491517120081,1.0545876438486022,1.2928916822337337

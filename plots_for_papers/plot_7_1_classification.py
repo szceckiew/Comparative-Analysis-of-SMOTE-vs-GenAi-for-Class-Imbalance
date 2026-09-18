@@ -8,10 +8,6 @@ import re
 import math
 
 def plot_7_1_classification(summary_csv_path, output_dir):
-    """
-    Generates classification plots (MCC and Recall) based on all aggregated results,
-    averaged across seeds and classifiers.
-    """
     print(f"Loading results analysis from: {summary_csv_path}")
     df = pd.read_csv(summary_csv_path)
 
@@ -40,47 +36,53 @@ def plot_7_1_classification(summary_csv_path, output_dir):
 
     def clean_dataset_name(name):
         str_name = str(name)
-        if str_name not in ['heart_balanced', 'iqr_heart_balanced', 'balanced_artificial_dataset', 'iqr_balanced_artificial_dataset']:
-            str_name = re.sub(r'(?i)clean', '', str_name)
-            str_name = re.sub(r'(?i)dataset', '', str_name)
-            str_name = re.sub(r'(?i)balanced', '', str_name)
+        is_iqr = bool(re.search(r'(?i)iqr', str_name))
         
-        str_name = str_name.replace('_', ' ').replace('-', ' ')
-        return re.sub(r'\s+', ' ', str_name).strip()
-
-    def map_display_name(cleaned_name: str) -> str:
-        s = cleaned_name.lower()
-        if 'blood' in s:
-            return 'Blood'
-        if 'breast' in s and 'cancer' in s:
-            return 'Breast Cancer Wisconsin'
-        if 'covid' in s:
-            return 'Covid-19'
-        if 'credit' in s and 'card' in s:
-            return 'Credit Card Fraud'
-        if 'ddos' in s or 'cicids' in s:
-            return 'DDoS'
-        if 'haberman' in s:
-            return "Haberman's Survival"
-        if 'heart' in s:
-            return 'Heart Disease'
-        if 'infiltration' in s:
-            return 'Infiltration'
-        if 'ionosphere' in s:
-            return 'Ionosphere'
-        if 'loan' in s:
-            return 'Loan Default'
-        if 'nsl' in s or 'nsl kdd' in s:
-            return 'NSL-KDD'
-        if 'pima' in s or 'diabetes' in s:
-            return 'Pima Indians Diabetes'
-        if 'shuttle' in s:
-            return 'Shuttle'
-        if 'titanic' in s:
-            return 'Titanic'
-        if 'weather' in s or 'weatheraus' in s:
-            return 'WeatherAUS'
-        return cleaned_name.title()
+        str_name = re.sub(r'(?i)clean', '', str_name)
+        str_name = re.sub(r'(?i)dataset', '', str_name)
+        str_name = re.sub(r'(?i)balanced', '', str_name)
+        str_name = re.sub(r'(?i)iqr', '', str_name)
+        str_name = str_name.replace('_', ' ').replace('-', ' ').strip().lower()
+        
+        base_name = ""
+        if 'blood' in str_name:
+            base_name = 'Blood'
+        elif 'breast' in str_name and 'cancer' in str_name:
+            base_name = 'Breast Cancer Wisconsin'
+        elif 'covid' in str_name:
+            base_name = 'Covid-19'
+        elif 'credit' in str_name and 'card' in str_name:
+            base_name = 'Credit Card Fraud'
+        elif 'ddos' in str_name or 'cicids' in str_name:
+            base_name = 'DDoS'
+        elif 'haberman' in str_name:
+            base_name = "Haberman's Survival"
+        elif 'heart' in str_name:
+            base_name = 'Heart Disease'
+        elif 'infiltration' in str_name:
+            base_name = 'Infiltration'
+        elif 'ionosphere' in str_name:
+            base_name = 'Ionosphere'
+        elif 'loan' in str_name:
+            base_name = 'Loan Default'
+        elif 'madelon' in str_name or 'mdlon' in str_name:
+            base_name = 'Madelon'
+        elif 'nsl' in str_name or 'nsl kdd' in str_name:
+            base_name = 'NSL-KDD'
+        elif 'pima' in str_name or 'diabetes' in str_name:
+            base_name = 'Pima Indians Diabetes'
+        elif 'shuttle' in str_name:
+            base_name = 'Shuttle'
+        elif 'titanic' in str_name:
+            base_name = 'Titanic'
+        elif 'weather' in str_name or 'weatheraus' in str_name:
+            base_name = 'WeatherAUS'
+        else:
+            base_name = ' '.join([w.capitalize() for w in str_name.split()])
+            
+        if is_iqr:
+            return f"IQR {base_name}"
+        return base_name
 
     subset['Dataset Name'] = subset['Dataset Name'].apply(clean_dataset_name)
     sample_datasets = subset['Dataset Name'].unique()
@@ -127,9 +129,23 @@ def plot_7_1_classification(summary_csv_path, output_dir):
 
     os.makedirs(output_dir, exist_ok=True)
 
-    plot_df = plot_df.sort_values(by=['Dataset Name', 'Augmentation Method'])
+    plot_df['is_iqr'] = plot_df['Dataset Name'].str.startswith('IQR')
+    plot_df = plot_df.sort_values(by=['is_iqr', 'Dataset Name', 'Augmentation Method'])
+    plot_df = plot_df.drop(columns=['is_iqr'])
 
     sea_cmap = 'YlGnBu'
+
+    def clean_colorbar_label(title_str):
+        t = title_str.replace(' Comparison', '')
+        t = re.sub(r'\(.*?\)', '', t)
+        words = t.split()
+        cleaned_words = []
+        for w in words:
+            if w.isupper():
+                cleaned_words.append(w)
+            else:
+                cleaned_words.append(w.lower())
+        return " ".join(cleaned_words)
 
     for col, title in available_metrics.items():
         plt.figure(figsize=(18, 10)) 
@@ -137,7 +153,9 @@ def plot_7_1_classification(summary_csv_path, output_dir):
         
         safe_name = col.replace(" (Mean)", "").replace(" ", "_").replace("(", "").replace(")", "").lower()
         
-        sns.heatmap(pivot_data, annot=True, fmt=".3f", cmap=sea_cmap, vmin=0.0, vmax=1.0, cbar_kws={'label': title.split(' ')[0]})
+        clean_label = clean_colorbar_label(title)
+        
+        sns.heatmap(pivot_data, annot=True, fmt=".3f", cmap=sea_cmap, vmin=0.0, vmax=1.0, cbar_kws={'label': clean_label})
         plt.ylabel('Augmentation Method', fontsize=14)
         plt.xlabel('Dataset', fontsize=14)
         plt.tight_layout()

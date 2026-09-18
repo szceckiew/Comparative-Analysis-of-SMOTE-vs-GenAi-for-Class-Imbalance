@@ -76,6 +76,7 @@ def plot_meta_features(csv_path):
             
             str_name = re.sub(r'\s+', ' ', str_name).strip()
             
+            str_name = re.sub(r'(?i)\bmdlon\b', 'Madelon', str_name)
             str_name = str_name.title()
             
             str_name = re.sub(r'(?i)nsl kdd', 'NSL KDD', str_name)

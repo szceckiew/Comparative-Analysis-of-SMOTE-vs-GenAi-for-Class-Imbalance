@@ -8,7 +8,9 @@ env/
 .env/
 .venv/
 
-results
+results/*
+!results
+!results/tsne_*.pdf
 # results/histograms
 # results/kendall_correlation
 
